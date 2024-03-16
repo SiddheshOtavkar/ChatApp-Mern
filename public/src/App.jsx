@@ -1,4 +1,3 @@
-import './App.css';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Chat from './pages/Chat';
 import Register from './pages/Register';
@@ -18,3 +17,5 @@ function App() {
 }
 
 export default App
+
+// https://github.com/koolkishan/chat-app-react-nodejs/blob/master/public/src/assets/robot.gif
