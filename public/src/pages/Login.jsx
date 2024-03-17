@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import styled from "styled-components";
 import { useNavigate, Link } from "react-router-dom";
@@ -10,6 +10,12 @@ import { loginRoute } from "../utils/APIRoute";
 const Login = () => {
 	const navigate = useNavigate();
 	const [values, setValues] = useState({ username: "", password: "" });
+
+	useEffect(() => {
+		if (localStorage.getItem(import.meta.env.VITE_APP_LOCALHOST_KEY)) {
+			navigate("/");
+		}
+	}, []);
 
 	const toastOptions = {
 		position: "bottom-right",
@@ -37,10 +43,7 @@ const Login = () => {
 
 				if (data.success === true) {
 					toast.success(data.message, toastOptions);
-					localStorage.setItem(
-						import.meta.env.VITE_APP_LOCALHOST_KEY,
-						JSON.stringify(data.user)
-					);
+					localStorage.setItem(import.meta.env.VITE_APP_LOCALHOST_KEY, JSON.stringify(data.user));
 					navigate("/");
 				}
 			} catch (error) {
@@ -74,7 +77,7 @@ const Login = () => {
 				<form action="" onSubmit={(e) => handleFormSubmit(e)}>
 					<div className="brand">
 						<img src={Logo} alt="logo" />
-						<h1>snappy</h1>
+						<h1>ChatSphere</h1>
 					</div>
 					<input
 						type="text"

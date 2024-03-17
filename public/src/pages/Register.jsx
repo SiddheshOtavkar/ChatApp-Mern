@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import styled from "styled-components";
 import Logo from "../assets/logo.svg";
@@ -25,6 +25,12 @@ const Register = () => {
         password: "",
         confirmPassword: "",
     });
+
+    useEffect(() => {
+		if (localStorage.getItem(import.meta.env.VITE_APP_LOCALHOST_KEY)) {
+			navigate("/");
+		}
+	}, []);
 
     const handleFormSubmit = async (e) => {
         e.preventDefault();
