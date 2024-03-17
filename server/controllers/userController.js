@@ -27,23 +27,51 @@ const registerController = async (req, res) => {
             message: "user registered successfully!!",
             success: true,
             user,
-        })
-
+        });
     } catch (error) {
         console.log(error);
-        res.status(500).send({
+        res.send({
             message: "Error in Registeration",
             success: false,
-            error
+            error,
         });
     }
 };
 
-const loginController = async (req, res, next) => {
-
-}
+const loginController = async (req, res) => {
+    try {
+        const { username, password } = req.body;
+        const user = await userModel.findOne({ username });
+        if (!user) {
+            return res.json({
+                message: "Invalid Username or Password",
+                success: false,
+            });
+        }
+        const passwordCheck = await bcrypt.compare(password, user.password);
+        if (!passwordCheck) {
+            return res.json({
+                message: "Invalid Username or Password",
+                success: false,
+            });
+        }
+        delete user.password;
+        res.json({
+            message: "User Login Successfully",
+            success: true,
+            user,
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(500).send({
+            message: "Error while Login",
+            success: false,
+            error,
+        });
+    }
+};
 
 module.exports = {
     registerController,
     loginController,
-}
+};
