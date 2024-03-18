@@ -71,7 +71,34 @@ const loginController = async (req, res) => {
     }
 };
 
+const setAvatarController = async (req, res) => {
+    try {
+        const userId = req.params.id;
+        const avatarImage = req.body.image;
+        const userData = await userModel.findByIdAndUpdate(
+            userId,
+            {
+                isAvatarImageSet: true,
+                avatarImage,
+            },
+            { new: true }
+        );
+        return res.json({
+            isSet: userData.isAvatarImageSet,
+            image: userData.avatarImage,
+        });
+    } catch (error) {
+        console.log(error);
+        res.json({
+            message: "Error while setting avatar",
+            success: false,
+            error,
+        });
+    }
+};
+
 module.exports = {
     registerController,
     loginController,
+    setAvatarController,
 };
