@@ -97,8 +97,34 @@ const setAvatarController = async (req, res) => {
     }
 };
 
+const getAllUsersController = async (req, res) => {
+    try {
+        const users = await userModel.find({
+            _id: { $ne: req.params.id }
+        }).select([
+            "email",
+            "username",
+            "avatarImage",
+            "_id",
+        ]);
+        res.json({
+            message: "All users are",
+            success: true,
+            users,
+        });
+    } catch (error) {
+        console.log(error);
+        res.json({
+            message: "Error while getting all users",
+            success: false,
+            error,
+        })
+    }
+};
+
 module.exports = {
     registerController,
     loginController,
     setAvatarController,
+    getAllUsersController,
 };

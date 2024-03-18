@@ -9,5 +9,6 @@ const {
 router.post("/register", registerController);
 router.post("/login", loginController);
 router.post("/setavatar/:id", setAvatarController);
+router.get("/allusers/:id", getAllUsers);
 
 module.exports = router;
