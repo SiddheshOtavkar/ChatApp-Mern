@@ -3,11 +3,11 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { io } from "socket.io-client";
 import styled from "styled-components";
-
 // import ChatContainer from "../components/ChatContainer";
 import Contacts from "../components/Contacts";
 import { allUsersRoute, host } from "../utils/APIRoute";
-// import Welcome from "../components/Welcome";
+import Welcome from "../components/Welcome";
+import ChatContainer from "../components/ChatContainer";
 
 const Chat = () => {
 
@@ -30,7 +30,6 @@ const Chat = () => {
                 console.error("Error fetching user data:", error);
             }
         };
-
         fetchData();
     }, []);
 
@@ -70,11 +69,11 @@ const Chat = () => {
             <Container>
                 <div className="container">
                     <Contacts contacts={contacts} changeChat={handleChatChange} />
-                    {/* {currentChat === undefined ? (
+                    {currentChat === undefined ? (
                         <Welcome />
                     ) : (
                         <ChatContainer currentChat={currentChat} socket={socket} />
-                    )} */}
+                    )}
                     Chat
                 </div>
             </Container>
