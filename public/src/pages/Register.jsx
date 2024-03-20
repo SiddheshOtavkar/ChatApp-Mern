@@ -49,7 +49,7 @@ const Register = () => {
             if (data.success === true) {
                 toast.success(data.message, toastOptions);
                 localStorage.setItem(import.meta.env.VITE_APP_LOCALHOST_KEY, JSON.stringify(data.user));
-                navigate("/");
+                navigate("/setAvatar");
             }
         }
     };

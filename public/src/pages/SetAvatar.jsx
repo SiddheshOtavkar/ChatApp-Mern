@@ -45,7 +45,7 @@ const SetAvatar = () => {
             if (data.isSet) {
                 user.isAvatarImageSet = true;
                 user.avatarImage = data.image;
-                localStorage.setItem(import.meta.env.REACT_APP_LOCALHOST_KEY, JSON.stringify(user));
+                localStorage.setItem(import.meta.env.VITE_APP_LOCALHOST_KEY, JSON.stringify(user));
                 navigate("/");
             } else {
                 toast.error("Error setting avatar. Please try again.", toastOptions);
