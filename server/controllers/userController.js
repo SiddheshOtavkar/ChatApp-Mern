@@ -1,4 +1,4 @@
-const userModel = require("../modal/userModel");
+const userModel = require("../models/userModel");
 const bcrypt = require("bcrypt");
 
 const registerController = async (req, res) => {
@@ -118,6 +118,28 @@ const getAllUsersController = async (req, res) => {
             message: "Error while getting all users",
             success: false,
             error,
+        })
+    }
+};
+
+const logOutController = async (req, res) => {
+    try {
+        if (!req.params.id) {
+            return res.json({
+                message: "User id is required",
+                success: false,
+            });
+        };
+        
+        res.json({
+            message: "Logout Successful",
+            success: true,
+        });
+    } catch (error) {
+        res.json({
+            message: "Error while logging out!",
+            success: false,
+            error
         })
     }
 };
